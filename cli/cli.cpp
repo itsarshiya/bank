@@ -4,44 +4,51 @@
 #include "../Person/Person.h"
 #include "../BankAccounts/BankAccount.h"
 #include "ie/Export.h"
+#include "ie/Import.h"
 #include "cli.h"
 
-void displayAccountInfo(const Person &person)
+void CLI::displayAccountInfo(const Person &person)
 {
-    // std::cout << "Account Information for " << person.getName() << std::endl;
-    std::cout << "------------------------------" << std::endl;
-    // for (const auto& account : person.getBankAccounts()) {
-    //     std::cout << "Account Number: " << account->getAccountNumber() << std::endl;
-    //     std::cout << "Balance: " << account->getBalance() << std::endl;
-    //     std::cout << std::endl;
-    // }
+    std::cout << "═════════════════════════════════════════════" << std::endl;
+    std::cout << "account info for " << person.getName() << std::endl;
+    std::cout << "═════════════════════════════════════════════" << std::endl;
+    std::cout << "total balance: " << person.getTotalBalance() << std::endl;
+    std::cout << "═════════════════════════════════════════════" << std::endl;
+    for (const auto &account : person.getBankAccounts())
+    {
+        account->display();
+    }
+    std::cout << "═════════════════════════════════════════════" << std::endl;
 }
 
-void printBankLogo()
+void CLI::printBankLogo()
 {
     std::string logo = R"(
-╔═══════════════════════════════════╗
-║        welcome to moneybank       ║
-╚═══════════════════════════════════╝
+╔═══════════════════════════════════════════╗
+║            welcome to moneybank           ║
+╚═══════════════════════════════════════════╝
 )";
     std::cout << logo << std::endl;
 }
 
-void runCLI(const std::list<Person> &persons)
+void CLI::runCLI(const std::string &filePath)
 {
+
+    importData(persons, filePath);
+
     printBankLogo();
 
     std::string username, password;
 
     while (true)
     {
-        std::cout << "please enter your username: ";
+        std::cout << "Please enter your username: ";
         std::cin >> username;
-        std::cout << "please enter your password: ";
+        std::cout << "Please enter your password: ";
         std::cin >> password;
 
-        auto it = std::find_if(persons.begin(), persons.end(), [&](const Person &p)
-                               { return p.getUsername() == username && p.getPassword() == password; });
+        auto it = std::find_if(persons.begin(), persons.end(), [&](const Person *p)
+                               { return p->getUsername() == username && p->getPassword() == password; });
 
         if (it != persons.end())
         {
@@ -49,34 +56,35 @@ void runCLI(const std::list<Person> &persons)
         }
         else
         {
-            std::cout << "invalid username or password. please try again." << std::endl;
+            std::cout << "Invalid username or password. Please try again." << std::endl;
         }
     }
 
-    const Person &person = *std::find_if(persons.begin(), persons.end(), [&](const Person &p)
-                                         { return p.getUsername() == username; });
+    const Person *person = *std::find_if(persons.begin(), persons.end(), [&](const Person *p)
+                                         { return p->getUsername() == username; });
 
-    displayAccountInfo(person);
+    // displayAccountInfo(person);
 
     std::string option;
     while (true)
     {
-        std::cout << "please select an option:" << std::endl;
-        std::cout << "1. check balance" << std::endl;
-        std::cout << "2. make a deposit" << std::endl;
-        std::cout << "3. make a withdrawal" << std::endl;
-        
-        if (person.getUsername() == "admin") {
-            std::cout << "4. import data" << std::endl;
-            std::cout << "5. export data" << std::endl;
+        std::cout << "Please select an option:" << std::endl;
+        std::cout << "1. Check balance" << std::endl;
+        std::cout << "2. Make a deposit" << std::endl;
+        std::cout << "3. Make a withdrawal" << std::endl;
+
+        if (person->getUsername() == "admin")
+        {
+            std::cout << "4. Import data" << std::endl;
+            std::cout << "5. Export data" << std::endl;
         }
-        std::cout << "0. exit" << std::endl;
-        std::cout << "option: ";
+        std::cout << "0. Exit" << std::endl;
+        std::cout << "Option: ";
         std::cin >> option;
 
         if (option == "1")
         {
-            displayAccountInfo(person);
+            // displayAccountInfo(person);
         }
         else if (option == "2")
         {
@@ -86,27 +94,27 @@ void runCLI(const std::list<Person> &persons)
         {
             // Implement the withdrawal functionality
         }
-        else if (option == "4" && person.getUsername() == "admin")
+        else if (option == "4" && person->getUsername() == "admin")
         {
-            
         }
-        else if (option == "5" && person.getUsername() == "admin")
+        else if (option == "5" && person->getUsername() == "admin")
         {
-            exportData(persons);
+            std::string filePath = "data.json"; // Specify the desired file path
+            exportData(persons, filePath);
         }
         else if (option == "0")
         {
             std::string logo = R"(
-╔═══════════════════════════════════╗
-║             goodbye :)            ║
-╚═══════════════════════════════════╝
+╔═══════════════════════════════════════════╗
+║                 goodbye :)                ║
+╚═══════════════════════════════════════════╝
 )";
             std::cout << logo << std::endl;
             break;
         }
         else
         {
-            std::cout << "invalid option. please try again." << std::endl;
+            std::cout << "Invalid option. Please try again." << std::endl;
         }
     }
 }

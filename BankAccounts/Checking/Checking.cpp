@@ -1,8 +1,8 @@
 #include "Checking.h"
 #include <iostream>
 
-Checking::Checking(const std::string& accountNumber, const Person& accountHolder, double balance, double overdraftLimit)
-    : BankAccount(accountNumber, accountHolder, balance), overdraftLimit(overdraftLimit) {}
+Checking::Checking(const Person& accountHolder, double balance, double overdraftLimit)
+    : BankAccount(accountHolder, balance), overdraftLimit(overdraftLimit) {}
 
 void Checking::withdraw(double amount) {
     if (amount <= balance + overdraftLimit) {

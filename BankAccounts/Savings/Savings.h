@@ -7,9 +7,13 @@ class Savings : public BankAccount {
     double interestRate;
 
 public:
-    Savings(const std::string& accountNumber, const Person& accountHolder, double balance, double interestRate);
+    Savings(const Person& accountHolder, double balance, double interestRate);
     void withdraw(double amount) override;
     void display() const override;
+
+    Type getType() const override {
+        return Type::Savings;
+    }
 };
 
 #endif

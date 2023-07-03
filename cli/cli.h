@@ -4,8 +4,15 @@
 #include <list>
 #include "../Person/Person.h"
 
-void displayAccountInfo(const Person& person);
-void runCLI(const std::list<Person>& persons);
-void printBankLogo();
+class CLI
+{
+private:
+    std::list<Person *> persons;
+
+public:
+    void displayAccountInfo(const Person &person);
+    void runCLI(const std::string& filePath);
+    void printBankLogo();
+};
 
 #endif

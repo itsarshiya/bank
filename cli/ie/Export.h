@@ -4,6 +4,6 @@
 #include <list>
 #include "../../Person/Person.h"
 
-void exportData(const std::list<Person>& persons);
+void exportData(const std::list<Person*>& persons, const std::string& filePath);
 
 #endif

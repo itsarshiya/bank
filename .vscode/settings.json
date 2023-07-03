@@ -64,7 +64,21 @@
         "algorithm": "cpp",
         "__tree": "cpp",
         "map": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "any": "cpp",
+        "condition_variable": "cpp",
+        "deque": "cpp",
+        "forward_list": "cpp",
+        "fstream": "cpp",
+        "iomanip": "cpp",
+        "numeric": "cpp",
+        "random": "cpp",
+        "set": "cpp",
+        "stack": "cpp",
+        "unordered_set": "cpp",
+        "ranges": "cpp",
+        "span": "cpp",
+        "valarray": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabled"
 }

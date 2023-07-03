@@ -1,0 +1,31 @@
+[
+    {
+        "accounts": [
+            {
+                "accountNumber": "6F8CDVFMO0TZ",
+                "balance": 1000.0,
+                "type": 1
+            },
+            {
+                "accountNumber": "MH7RW61BIA7E",
+                "balance": 5000.0,
+                "type": 0
+            }
+        ],
+        "name": "Arshiya Sharifi",
+        "password": "test",
+        "username": "arshiya"
+    },
+    {
+        "accounts": [
+            {
+                "accountNumber": "K4QRXXIO0Y78",
+                "balance": 1000000.0,
+                "type": 1
+            }
+        ],
+        "name": "developer",
+        "password": "test",
+        "username": "admin"
+    }
+]

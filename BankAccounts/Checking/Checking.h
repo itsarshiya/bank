@@ -7,9 +7,13 @@ class Checking : public BankAccount {
     double overdraftLimit;
 
 public:
-    Checking(const std::string& accountNumber, const Person& accountHolder, double balance, double overdraftLimit);
+    Checking(const Person& accountHolder, double balance, double overdraftLimit);
     void withdraw(double amount) override;
     void display() const override;
+
+    Type getType() const override {
+        return Type::Checking;
+    }
 };
 
 #endif
