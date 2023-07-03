@@ -35,8 +35,12 @@ target_link_libraries(bank PRIVATE nlohmann_json::nlohmann_json)
 
 set(TEST_SOURCES
     tests/Tests.cpp
+    BankAccounts/BankAccount.cpp
+    BankAccounts/Savings/Savings.cpp
+    BankAccounts/Checking/Checking.cpp
     Person/Person.cpp
     cli/ie/Export.cpp
+    cli/ie/Import.cpp
 )
 
 add_executable(tests ${TEST_SOURCES})

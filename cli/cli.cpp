@@ -9,7 +9,7 @@
 #include "ie/Import.h"
 #include "cli.h"
 
-void CLI::displayAccountInfo(const Person* person)
+void CLI::displayAccountInfo(const Person *person)
 {
     std::cout << "═════════════════════════════════════════════" << std::endl;
     std::cout << "account info for " << person->getName() << std::endl;
@@ -43,31 +43,42 @@ void CLI::createAccount()
     std::cout << "enter your password: ";
     std::cin >> password;
 
-    Person* person = new Person(name, username, password);
-    BankAccount* account = new Checking(person, 0.0, 0.05);
+    Person *person = new Person(name, username, password);
+    BankAccount *account = new Checking(person, 0.0, 0.05);
     person->addBankAccount(account);
     persons.push_back(person);
 
     std::cout << "account created successfully!" << std::endl;
 }
 
-void CLI::deposit(const Person* person)
-{
-    Checking* checkingAccount = dynamic_cast<Checking*>(person->getBankAccounts()[0]);
-
-    if (checkingAccount)
-    {
-        double amount;
-        std::cout << "enter the amount to deposit: ";
-        std::cin >> amount;
-
-        checkingAccount->deposit(amount);
-        std::cout << "deposit successful!" << std::endl;
+void CLI::deposit(const Person *person)
+{  
+    double amount;
+    std::cout << "enter the amount to deposit: ";
+    std::cin >> amount;
+        
+    for (BankAccount* account : person->getBankAccounts()) {
+        if (account->getType() == Type::Checking) {
+            account->deposit(amount);
+            return;
+        }
     }
-    else
-    {
-        std::cout << "no checking account found. please create a checking account first." << std::endl;
+    std::cout << "deposit failed" << std::endl;
+}
+
+void CLI::withdraw(const Person *person)
+{  
+    double amount;
+    std::cout << "enter the amount to deposit: ";
+    std::cin >> amount;
+        
+    for (BankAccount* account : person->getBankAccounts()) {
+        if (account->getType() == Type::Checking) {
+            account->withdraw(amount);
+            return;
+        }
     }
+    std::cout << "withdraw failed" << std::endl;
 }
 
 std::string CLI::login()
@@ -78,13 +89,12 @@ std::string CLI::login()
     std::cout << "Enter your password: ";
     std::cin >> password;
 
-    auto it = std::find_if(persons.begin(), persons.end(), [&](const Person* p) {
-        return p->getUsername() == username && p->getPassword() == password;
-    });
+    auto it = std::find_if(persons.begin(), persons.end(), [&](const Person *p)
+                           { return p->getUsername() == username && p->getPassword() == password; });
 
     if (it != persons.end())
     {
-        const Person* person = *it;
+        const Person *person = *it;
         displayAccountInfo(person);
         return username;
     }
@@ -95,7 +105,7 @@ std::string CLI::login()
     }
 }
 
-void CLI::runCLI(const std::string& filePath)
+void CLI::run(const std::string &filePath)
 {
     importData(persons, filePath);
 
@@ -139,22 +149,22 @@ void CLI::runCLI(const std::string& filePath)
         }
     }
 
-    const Person* person = *std::find_if(persons.begin(), persons.end(), [&](const Person* p) {
-        return p->getUsername() == loggedInUsername;
-    });
+    const Person *person = *std::find_if(persons.begin(), persons.end(), [&](const Person *p)
+                                         { return p->getUsername() == loggedInUsername; });
 
     std::string accountOption;
     while (true)
     {
         std::cout << "Please select an option:" << std::endl;
         std::cout << "1. Check balance" << std::endl;
-        std::cout << "2. Make a deposit" << std::endl;
-        std::cout << "3. Add savings account" << std::endl;
+        std::cout << "2. deposit" << std::endl;
+        std::cout << "3. withdraw" << std::endl;
+        std::cout << "4. Add savings account" << std::endl;
 
         if (person->getUsername() == "admin")
         {
-            std::cout << "4. Import data" << std::endl;
-            std::cout << "5. Export data" << std::endl;
+            std::cout << "5. Import data" << std::endl;
+            std::cout << "6. Export data" << std::endl;
         }
         std::cout << "0. Log out" << std::endl;
         std::cout << "Option: ";
@@ -170,19 +180,23 @@ void CLI::runCLI(const std::string& filePath)
         }
         else if (accountOption == "3")
         {
+            withdraw(person);
+        }
+        else if (accountOption == "4")
+        {
             addSavingsAccount(person);
         }
-        else if (option == "4" && person->getUsername() == "admin")
+        else if (option == "5" && person->getUsername() == "admin")
         {
         }
-        else if (option == "5" && person->getUsername() == "admin")
+        else if (option == "6" && person->getUsername() == "admin")
         {
             exportData(persons, filePath);
         }
         else if (accountOption == "0")
         {
             exportData(persons, filePath);
-std::string logo = R"(
+            std::string logo = R"(
 ╔═══════════════════════════════════════════╗
 ║                 goodbye!                  ║
 ╚═══════════════════════════════════════════╝
@@ -195,9 +209,9 @@ std::string logo = R"(
             std::cout << "Invalid option. Please try again." << std::endl;
         }
     }
-}   
+}
 
-void CLI::addSavingsAccount(const Person* person)
+void CLI::addSavingsAccount(const Person *person)
 {
     // Savings* savingsAccount = new Savings(person, 0, 0.05);
     // person->addBankAccount(savingsAccount);

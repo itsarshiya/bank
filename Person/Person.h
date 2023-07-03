@@ -12,21 +12,18 @@ private:
     std::string name;
     std::string username;
     std::string password;
-    std::vector<BankAccount*> bankAccounts;
+    std::vector<BankAccount *> bankAccounts;
 
 public:
     Person(const std::string &name, const std::string &username, const std::string &password);
     ~Person();
 
     void addBankAccount(BankAccount *account);
-    const std::vector<BankAccount*>& getBankAccounts() const;
+    const std::vector<BankAccount *> &getBankAccounts() const;
 
-    void deposit(const std::string &accountNumber, double amount);
-    void withdraw(const std::string &accountNumber, double amount);
     void displayAccounts() const;
 
     double getTotalBalance() const;
-
 
     const std::string &getUsername() const
     {

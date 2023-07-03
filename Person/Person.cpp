@@ -24,30 +24,12 @@ const std::vector<BankAccount *> &Person::getBankAccounts() const
     return bankAccounts;
 }
 
-// void Person::deposit(const std::string& accountNumber, double amount) {
-//     for (BankAccount* account : bankAccounts) {
-//         if (account->getAccountNumber() == accountNumber) {
-//             account->deposit(amount);
-//             return;
-//         }
-//     }
-//     std::cout << "Account not found!" << std::endl;
-// }
-
-// void Person::withdraw(const std::string& accountNumber, double amount) {
-//     for (BankAccount* account : bankAccounts) {
-//         if (account->getAccountNumber() == accountNumber) {
-//             account->withdraw(amount);
-//             return;
-//         }
-//     }
-//     std::cout << "Account not found!" << std::endl;
-// }
-
-double Person::getTotalBalance() const {
+double Person::getTotalBalance() const
+{
     double totalBalance = 0.0;
 
-    for (const BankAccount* account : bankAccounts) {
+    for (const BankAccount *account : bankAccounts)
+    {
         totalBalance += account->getBalance();
     }
 

@@ -3,15 +3,17 @@
 
 #include "../BankAccount.h"
 
-class Checking : public BankAccount {
-    double overdraftLimit;
+class Checking : public BankAccount
+{
+    double overdraftLimit = 500;
 
 public:
-    Checking(const Person* accountHolder, double balance, double overdraftLimit);
+    Checking(const Person *accountHolder, double balance, double overdraftLimit);
     void withdraw(double amount) override;
     void display() const override;
 
-    Type getType() const override {
+    Type getType() const override
+    {
         return Type::Checking;
     }
 };

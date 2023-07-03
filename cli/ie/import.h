@@ -6,6 +6,6 @@
 
 class Person;
 
-void importData(std::list<Person*>& persons, const std::string& filePath);
+void importData(std::list<Person *> &persons, const std::string &filePath);
 
 #endif

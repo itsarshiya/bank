@@ -3,15 +3,17 @@
 
 #include "../BankAccount.h"
 
-class Savings : public BankAccount {
-    double interestRate;
+class Savings : public BankAccount
+{
+    double interestRate = 0.05;
 
 public:
-    Savings(const Person* accountHolder, double balance, double interestRate);
+    Savings(const Person *accountHolder, double balance, double interestRate);
     void withdraw(double amount) override;
     void display() const override;
 
-    Type getType() const override {
+    Type getType() const override
+    {
         return Type::Savings;
     }
 };

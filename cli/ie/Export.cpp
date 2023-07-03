@@ -32,7 +32,7 @@ void exportData(const std::list<Person*>& persons, const std::string& filePath) 
 
     std::ofstream outputFile(filePath);
     if (outputFile.is_open()) {
-        outputFile << data.dump(4);  // Indentation of 4 spaces
+        outputFile << data.dump(4);  // indentation of 4 spaces
         outputFile.close();
         std::cout << "data exported to " << filePath << std::endl;
     } else {
