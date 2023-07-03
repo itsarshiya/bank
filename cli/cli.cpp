@@ -47,8 +47,9 @@ void CLI::createAccount()
     BankAccount *account = new Checking(person, 0.0, 0.05);
     person->addBankAccount(account);
     persons.push_back(person);
-
+    std::cout << "═════════════════════════════════════════════" << std::endl;
     std::cout << "account created successfully!" << std::endl;
+    std::cout << "═════════════════════════════════════════════" << std::endl;
 }
 
 void CLI::deposit(const Person *person)
@@ -69,7 +70,7 @@ void CLI::deposit(const Person *person)
 void CLI::withdraw(const Person *person)
 {  
     double amount;
-    std::cout << "enter the amount to deposit: ";
+    std::cout << "enter the amount to withdraw: ";
     std::cin >> amount;
         
     for (BankAccount* account : person->getBankAccounts()) {
@@ -84,23 +85,23 @@ void CLI::withdraw(const Person *person)
 std::string CLI::login()
 {
     std::string username, password;
-    std::cout << "Enter your username: ";
+    std::cout << "enter your username: ";
     std::cin >> username;
-    std::cout << "Enter your password: ";
+    std::cout << "enter your password: ";
     std::cin >> password;
 
-    auto it = std::find_if(persons.begin(), persons.end(), [&](const Person *p)
+    auto current = std::find_if(persons.begin(), persons.end(), [&](const Person *p)
                            { return p->getUsername() == username && p->getPassword() == password; });
 
-    if (it != persons.end())
+    if (current != persons.end())
     {
-        const Person *person = *it;
+        const Person *person = *current;
         displayAccountInfo(person);
         return username;
     }
     else
     {
-        std::cout << "Invalid username or password. Please try again." << std::endl;
+        std::cout << "invalid username or password. please try again." << std::endl;
         return "";
     }
 }
@@ -115,11 +116,11 @@ void CLI::run(const std::string &filePath)
     std::string loggedInUsername;
     while (true)
     {
-        std::cout << "Please select an option:" << std::endl;
-        std::cout << "1. Create an account" << std::endl;
-        std::cout << "2. Log in" << std::endl;
-        std::cout << "0. Exit" << std::endl;
-        std::cout << "Option: ";
+        std::cout << "please select an option:" << std::endl;
+        std::cout << "1. create an account" << std::endl;
+        std::cout << "2. log in" << std::endl;
+        std::cout << "0. exit" << std::endl;
+        std::cout << "option: ";
         std::cin >> option;
 
         if (option == "1")
@@ -145,7 +146,7 @@ void CLI::run(const std::string &filePath)
         }
         else
         {
-            std::cout << "Invalid option. Please try again." << std::endl;
+            std::cout << "invalid option. please try again." << std::endl;
         }
     }
 
@@ -155,18 +156,18 @@ void CLI::run(const std::string &filePath)
     std::string accountOption;
     while (true)
     {
-        std::cout << "Please select an option:" << std::endl;
-        std::cout << "1. Check balance" << std::endl;
+        std::cout << "please select an option:" << std::endl;
+        std::cout << "1. check balance" << std::endl;
         std::cout << "2. deposit" << std::endl;
         std::cout << "3. withdraw" << std::endl;
-        std::cout << "4. Add savings account" << std::endl;
+        std::cout << "4. add savings account" << std::endl;
 
         if (person->getUsername() == "admin")
         {
-            std::cout << "5. Import data" << std::endl;
-            std::cout << "6. Export data" << std::endl;
+            std::cout << "5. import data" << std::endl;
+            std::cout << "6. export data" << std::endl;
         }
-        std::cout << "0. Log out" << std::endl;
+        std::cout << "0. log out" << std::endl;
         std::cout << "Option: ";
         std::cin >> accountOption;
 
@@ -206,7 +207,7 @@ void CLI::run(const std::string &filePath)
         }
         else
         {
-            std::cout << "Invalid option. Please try again." << std::endl;
+            std::cout << "invalid option. please try again." << std::endl;
         }
     }
 }

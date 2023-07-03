@@ -45,18 +45,28 @@ Bij het exiten van de CLI worden alle persons en backaccounts gepurged.
 
 #### Zinnige foutmeldingen mocht er iets fout gaan, afhandeling via exceptions.
 
-Binnen de Import/Export wordt er gebruik gemaakt van `std::cerr` om errors af te handelen.
-
-`cli/ie/Export.cpp`
+Binnen de Import/Export wordt er gebruik gemaakt van `std::cerr` om errors af te handelen
 
 #### Weloverwogen gebruik van algoritmes binnen de applicatie (zowel zelfgeschreven alsmede de STL-bibliotheek).
 
-Er wordt gebruikt gemaakt van de JSON library samen met de vector en lists uit de STL biblitheek.
+Er wordt gebruikt gemaakt van de JSON library samen met de vector en lists uit de STL biblitheek. Verder maakt CLI.cpp gebruik van ` std::find_if` om de juiste persoon te koppelen aan de inloggegevens
+
+`cli/cli.cpp:92`
+
+#### Ervoor zorgen dat je programma const, constexpr en override correct is.
+
+Bij het aanmaken van een person wordt er rekening mee gehouden dat er een constante pointer gelinked staat naar het object van een person. Verder wordt er bij `Savings.h` en `Checking.h` gebruik gemaakt van een override op de virtuele functies.
+
+#### Lambda expressies, denk hierbij ook aan een typedef.
+
+In `cli/cli.cpp:92` wordt er gebruik gemaakt van een Lambda functie om te zoeken naar het juiste persoon binnen alle personen.
 
 ## how to run
 
+- install cmake `brew install cmake`
+- install json `brew install nlohmann-json`
+- install googletest `brew install googletest`
 - first run cmake .. in the build folder
 - make to build the project
 - using `./bank` start the CLI
 - using `./tests` run the tests
-
