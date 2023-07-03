@@ -14,13 +14,13 @@ class BankAccount
 {
 protected:
     std::string accountNumber;
-    Person accountHolder;
+    const Person* accountHolder;  
     double balance;
 
     std::string generateAccountNumber();
 
 public:
-    BankAccount(const Person &accountHolder, double balance);
+    BankAccount(const Person* accountHolder, double balance);
     virtual ~BankAccount();
 
     virtual void deposit(double amount);

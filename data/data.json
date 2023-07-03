@@ -2,12 +2,12 @@
     {
         "accounts": [
             {
-                "accountNumber": "6F8CDVFMO0TZ",
+                "accountNumber": "QF3PW5MCOZ7Q",
                 "balance": 1000.0,
                 "type": 1
             },
             {
-                "accountNumber": "MH7RW61BIA7E",
+                "accountNumber": "ZBDTSAMRKWFK",
                 "balance": 5000.0,
                 "type": 0
             }
@@ -19,13 +19,37 @@
     {
         "accounts": [
             {
-                "accountNumber": "K4QRXXIO0Y78",
-                "balance": 1000000.0,
-                "type": 1
+                "accountNumber": "4TC9489M27TT",
+                "balance": 1000020.0,
+                "type": 0
             }
         ],
         "name": "developer",
         "password": "test",
         "username": "admin"
+    },
+    {
+        "accounts": [
+            {
+                "accountNumber": "I90B74BTFV33",
+                "balance": 0.0,
+                "type": 0
+            }
+        ],
+        "name": "timo",
+        "password": "waka",
+        "username": "tel"
+    },
+    {
+        "accounts": [
+            {
+                "accountNumber": "0GLYIZBPKR1E",
+                "balance": 0.0,
+                "type": 0
+            }
+        ],
+        "name": "malaak",
+        "password": "test",
+        "username": "extro"
     }
 ]

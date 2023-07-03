@@ -2,8 +2,9 @@
 #include <iostream>
 #include <random>
 #include <sstream>
+#include <iomanip>
 
-BankAccount::BankAccount(const Person& accountHolder, double balance)
+BankAccount::BankAccount(const Person* accountHolder, double balance)
     : accountHolder(accountHolder), balance(balance) {
     accountNumber = generateAccountNumber();
 }
@@ -16,8 +17,8 @@ void BankAccount::deposit(double amount) {
 
 void BankAccount::display() const {
     std::cout << "account number: " << accountNumber << std::endl;
-    std::cout << "account owner: " << accountHolder.getName() << std::endl;
-    std::cout << "balance: " << balance << std::endl;
+    std::cout << "account owner: " << accountHolder->getName() << std::endl;
+    std::cout << "balance: " << std::fixed << std::setprecision(2) << balance << std::endl;
 }
 
 const std::string& BankAccount::getAccountNumber() const {

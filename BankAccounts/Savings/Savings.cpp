@@ -1,7 +1,7 @@
 #include "Savings.h"
 #include <iostream>
 
-Savings::Savings(const Person& accountHolder, double balance, double interestRate)
+Savings::Savings(const Person* accountHolder, double balance, double interestRate)
     : BankAccount(accountHolder, balance), interestRate(interestRate) {}
 
 void Savings::withdraw(double amount) {

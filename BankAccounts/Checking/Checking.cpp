@@ -1,7 +1,7 @@
 #include "Checking.h"
 #include <iostream>
 
-Checking::Checking(const Person& accountHolder, double balance, double overdraftLimit)
+Checking::Checking(const Person* accountHolder, double balance, double overdraftLimit)
     : BankAccount(accountHolder, balance), overdraftLimit(overdraftLimit) {}
 
 void Checking::withdraw(double amount) {

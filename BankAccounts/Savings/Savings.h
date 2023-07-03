@@ -7,7 +7,7 @@ class Savings : public BankAccount {
     double interestRate;
 
 public:
-    Savings(const Person& accountHolder, double balance, double interestRate);
+    Savings(const Person* accountHolder, double balance, double interestRate);
     void withdraw(double amount) override;
     void display() const override;
 

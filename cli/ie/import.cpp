@@ -34,9 +34,9 @@ void importData(std::list<Person*>& persons, const std::string& filePath) {
 
             BankAccount* account = nullptr;
             if (type == Type::Savings) {
-                account = new Savings(*person, balance, 0.05);
+                account = new Savings(person, balance, 0.05);
             } else if (type == Type::Checking) {
-                account = new Checking(*person, balance, 1000.0);
+                account = new Checking(person, balance, 1000.0);
             }
 
             if (account) {
@@ -46,4 +46,5 @@ void importData(std::list<Person*>& persons, const std::string& filePath) {
 
         persons.push_back(person);
     }
+    std::cerr << "imported data from " << filePath << std::endl;
 }

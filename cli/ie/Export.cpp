@@ -34,8 +34,8 @@ void exportData(const std::list<Person*>& persons, const std::string& filePath) 
     if (outputFile.is_open()) {
         outputFile << data.dump(4);  // Indentation of 4 spaces
         outputFile.close();
-        std::cout << "data exported to " << filePath << " successfully." << std::endl;
+        std::cout << "data exported to " << filePath << std::endl;
     } else {
-        std::cerr << "error opening " << filePath << " for writing." << std::endl;
+        std::cerr << "error opening " << filePath << std::endl;
     }
 }
